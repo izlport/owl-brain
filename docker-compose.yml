@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: owl-postgres
+    environment:
+      POSTGRES_DB: owl_brain
+      POSTGRES_USER: owl
+      POSTGRES_PASSWORD: owl_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U owl -d owl_brain"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      target: development
+    container_name: owl-app
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_URL: postgresql+asyncpg://owl:owl_password@postgres:5432/owl_brain
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: tail -f /dev/null
+
+volumes:
+  postgres_data:
