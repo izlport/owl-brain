@@ -1,0 +1,90 @@
+[
+  {
+    "conversation_id": "conv-sample-001",
+    "title": "Python Async Programming Tips",
+    "create_time": 1700000000.0,
+    "mapping": {
+      "node-1": {
+        "message": {
+          "role": "user",
+          "content": {
+            "parts": ["What is the best way to handle async tasks in Python?"]
+          },
+          "create_time": 1700000000.0
+        }
+      },
+      "node-2": {
+        "message": {
+          "role": "assistant",
+          "content": {
+            "parts": ["Use `asyncio` with `async`/`await` syntax. The `asyncio.create_task()` function is great for running concurrent tasks."]
+          },
+          "create_time": 1700000010.0
+        }
+      },
+      "node-3": {
+        "message": {
+          "role": "user",
+          "content": {
+            "parts": ["Can you show me an example?"]
+          },
+          "create_time": 1700000020.0
+        }
+      },
+      "node-4": {
+        "message": {
+          "role": "assistant",
+          "content": {
+            "parts": [
+              "```python\nimport asyncio\n\nasync def main():\n    task1 = asyncio.create_task(fetch_data('url1'))\n    task2 = asyncio.create_task(fetch_data('url2'))\n    results = await asyncio.gather(task1, task2)\n    print(results)\n\nasyncio.run(main())\n```\nThis runs both fetches concurrently."
+            ]
+          },
+          "create_time": 1700000030.0
+        }
+      }
+    }
+  },
+  {
+    "conversation_id": "conv-sample-002",
+    "title": "PostgreSQL Indexing Strategy",
+    "create_time": 1700001000.0,
+    "mapping": {
+      "node-10": {
+        "message": {
+          "role": "user",
+          "content": {
+            "parts": ["What indexes should I create for a large PostgreSQL table?"]
+          },
+          "create_time": 1700001000.0
+        }
+      },
+      "node-11": {
+        "message": {
+          "role": "assistant",
+          "content": {
+            "parts": ["Start with B-tree indexes on columns used in WHERE clauses. Use `EXPLAIN ANALYZE` to find slow queries, then create indexes based on the query patterns."]
+          },
+          "create_time": 1700001010.0
+        }
+      },
+      "node-12": {
+        "message": {
+          "role": "user",
+          "content": {
+            "parts": ["What about GIN indexes?"]
+          },
+          "create_time": 1700001020.0
+        }
+      },
+      "node-13": {
+        "message": {
+          "role": "assistant",
+          "content": {
+            "parts": ["GIN indexes are great for full-text search, JSONB queries, and array columns. For example:\n\n```sql\nCREATE INDEX idx_docs_content ON documents USING GIN(to_tsvector('english', content));\n```"]
+          },
+          "create_time": 1700001030.0
+        }
+      }
+    }
+  }
+]
