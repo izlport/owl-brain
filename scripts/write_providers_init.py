@@ -1,4 +1,8 @@
-"""Provider registry and factory."""
+"""Write app/providers/__init__.py with proper content."""
+
+import os
+
+content = '''"""Provider registry and factory."""
 
 from app.config.settings import settings
 from app.providers.llm import DeepSeekProvider, LLMProvider
@@ -35,3 +39,16 @@ __all__ = [
     "LLMProvider",
     "get_llm_provider",
 ]
+'''
+
+target = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "app",
+    "providers",
+    "__init__.py",
+)
+
+with open(target, "w") as f:
+    f.write(content)
+
+print(f"Written to {target}")
